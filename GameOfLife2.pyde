@@ -1,10 +1,10 @@
 from random import choice
 
-GRID_W = 100
-GRID_H = 100
+GRID_W = 51
+GRID_H = 51
 
 #Size of cell
-SZ = 18
+
 generation = 0
 class Cell:
     def __init__(self,c,r,state=0):
