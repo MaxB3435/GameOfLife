@@ -2,7 +2,7 @@ from random import choice
 
 GRID_W = 51
 GRID_H = 51
-222
+
 #Size of cell
 SZ = 18
 generation = 0
@@ -36,6 +36,17 @@ class Cell:
         if neighbs == 3:
             return 1
         return 0
+    def checkMouse(self):
+
+        if mouseY//SZ == self.c and mouseX//SZ == self.r:
+            if self.state == 0:
+                return 1
+            else: return 0
+        elif self.state == 0:
+            return 0
+        elif self.state == 1:
+            return 1
+    
         
 def setup():
     noStroke()
@@ -78,11 +89,29 @@ def createCellList():
     for j in range(GRID_H):
         newList.append([])
         for i in range(GRID_W):
-            newList [j].append(Cell(i,j,choice([0,1])))
+            newList [j].append(Cell(i,j,choice([0])))
             
-    newList [GRID_H//2][GRID_W//2].state = 1
+
     return newList
-                 
+
+def mousePressed():
+    global cellList
+    cellList = addCell(cellList)
+    for row in cellList:
+        for cell in row:
+            cell.display()
+
+
+def addCell(cellList):
+    newList = []
+    for r,row in enumerate(cellList):
+        newList.append([])
+        for c,cell in enumerate(row):
+            newList[r].append(Cell(c,r,cell.checkMouse()))
+    return newList[::]     
+
+            
+             
 
         
     
