@@ -1,7 +1,7 @@
 from random import choice
 
-GRID_W = 51
-GRID_H = 51
+GRID_W = 100
+GRID_H = 100
 
 #Size of cell
 SZ = 18
