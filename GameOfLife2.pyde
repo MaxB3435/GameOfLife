@@ -2,7 +2,7 @@ from random import choice
 
 GRID_W = 51
 GRID_H = 51
-
+222
 #Size of cell
 SZ = 18
 generation = 0
