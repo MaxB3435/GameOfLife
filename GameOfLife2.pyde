@@ -3,9 +3,8 @@ from random import choice
 GRID_W = 51
 GRID_H = 51
 
-#Size of cell
+#Size of cell == SZ
 
-generation = 0
 class Cell:
     def __init__(self,c,r,state=0):
         self.c = c
@@ -38,7 +37,7 @@ class Cell:
         return 0
     def checkMouse(self):
 
-        if mouseY//SZ == self.c and mouseX//SZ == self.r:
+        if mouseY//SZ == self.c and mouseX//SZ == self.r: # if mouse on cell change state and keep all other cells the same
             if self.state == 0:
                 return 1
             else: return 0
@@ -58,57 +57,57 @@ def setup():
     
 def draw():
   #  global cellList
-    frameRate(10)
+    frameRate(30)
 #    cellList = update(cellList)
 #    for row in cellList:
 #        for cell in row:
 #            cell.display()
 
-def keyPressed():
-    global generation,cellList
-    cellList = update(cellList)
+def keyPressed(): 
+    global cellList
+    cellList = update(cellList) # changes the cellList to the new list after an update
     for row in cellList:
         for cell in row:
-            cell.display()
+            cell.display() # displays the new cells
 
     
     
     
         
 def update(cellList):
-    newList = []
+    newList = [] # creats a new list
     for r,row in enumerate(cellList):
-        newList.append([])
+        newList.append([]) # adds empty row
         for c,cell in enumerate(row):
-            newList[r].append(Cell(c,r,cell.checkNeighbors()))
-    return newList[::]        
+            newList[r].append(Cell(c,r,cell.checkNeighbors())) # adds a new cell in the row depending on the neighbors of the cell before the update
+    return newList[::]    #returns the newList
     
             
 def createCellList():
-    newList=[]
-    for j in range(GRID_H):
-        newList.append([])
+    newList=[] # creats an empty list
+    for j in range(GRID_H): 
+        newList.append([]) # adds empty row
         for i in range(GRID_W):
-            newList [j].append(Cell(i,j,choice([0])))
+            newList [j].append(Cell(i,j,choice([0])))# adds off cells in the rows 
             
 
     return newList
 
 def mousePressed():
     global cellList
-    cellList = addCell(cellList)
+    cellList = addCell(cellList) # changes current celllist to the celllist after adding a cell 
     for row in cellList:
         for cell in row:
-            cell.display()
+            cell.display() # displays the new cellList
 
 
 def addCell(cellList):
-    newList = []
+    newList = [] # creats a new list
     for r,row in enumerate(cellList):
-        newList.append([])
+        newList.append([]) # adds empty row
         for c,cell in enumerate(row):
-            newList[r].append(Cell(c,r,cell.checkMouse()))
-    return newList[::]     
+            newList[r].append(Cell(c,r,cell.checkMouse())) # keeps cells the same except changes the state of the cell where the mouse is
+    return newList[::]    #returns the newList 
 
             
              
