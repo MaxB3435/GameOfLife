@@ -1,8 +1,9 @@
 from random import choice
 
-GRID_W = 51
-GRID_H = 51
+GRID_W = 100
+GRID_H = 100
 
+play = False
 #Size of cell == SZ
 
 class Cell:
@@ -56,19 +57,25 @@ def setup():
 
     
 def draw():
-  #  global cellList
-    frameRate(30)
-#    cellList = update(cellList)
-#    for row in cellList:
-#        for cell in row:
-#            cell.display()
+    global cellList
+    global play
+    frameRate(10)
+    if play == True:
+        cellList = update(cellList)
+        for row in cellList:
+            for cell in row:
+                cell.display()
 
 def keyPressed(): 
     global cellList
-    cellList = update(cellList) # changes the cellList to the new list after an update
-    for row in cellList:
-        for cell in row:
-            cell.display() # displays the new cells
+    global play
+    if play == False:
+        play = True
+    else: play = False
+    #cellList = update(cellList) # changes the cellList to the new list after an update
+    #for row in cellList:
+        #for cell in row:
+            #cell.display() # displays the new cells
 
     
     
